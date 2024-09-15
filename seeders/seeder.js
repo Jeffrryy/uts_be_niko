@@ -38,9 +38,16 @@ const createSeeder = async () => {
         
     })
     const listMenu = await ListMenu.create({
-        details:foodItem.dataValues.itemName,
-        foodItemId:foodItem.dataValues.id
-    })                             
+        details:"makanan berat",
+        foodItemId:foodItem.dataValues.id,
+        customerId:customer.dataValues.id
+    })   
+    
+    const listMenu2 = await ListMenu.create({
+        details:"makanan ringan",
+        foodItemId:foodItem2.dataValues.id,
+        customerId:customer2.dataValues.id
+    })   
     const order = await Order.create({
         status:"onDelivery",
         orderDate:new Date(),
@@ -64,6 +71,7 @@ const createSeeder = async () => {
     //     ]
 
     // })
+ 
   
 
     return {customer,foodItem,order,payment}

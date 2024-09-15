@@ -1,6 +1,6 @@
 import FoodItem from "../models/foodItemModel.js";
 import ListMenu from "../models/listMenuModel.js";
-
+import Customer from "../models/customerModel.js";
 // Membuat menu baru
 export const createListMenu = async (req, res) => {
     const { details } = req.body;
@@ -21,13 +21,13 @@ export const getAllListMenu = async (req, res) => {
     try {
         const listMenu = await ListMenu.findAll({
             include:{
-                model:FoodItem,
-                as:'foodItem'
+                model:Customer,
+                as:'customer',
             }
         });
         res.status(200).json(listMenu);
     } catch (err) {
-        res.status(500).json({ error: err, pesan: "Tidak dapat menemukan menu" });
+        res.status(500).json({ error: err.message, pesan: "Tidak dapat menemukan menu" });
     }
 };
 

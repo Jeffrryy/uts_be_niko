@@ -4,7 +4,7 @@ import {createListMenu,getAllListMenu,getListMenuById,updateListMenu,deleteListM
 const listMenuRoute = express.Router();
 
 listMenuRoute.post('/listmenu/create', createListMenu)
-listMenuRoute.get('/listmenu/find', getAllListMenu)
+listMenuRoute.get('/listmenu/findall', getAllListMenu)
 listMenuRoute.get('/listmenu/findbyid/:id', getListMenuById)
 listMenuRoute.put('/listmenu/update/:id', updateListMenu)
 listMenuRoute.delete('/listmenu/delete/:id', deleteListMenu)

@@ -3,7 +3,7 @@ import { createCustomer , getAllCustomers, getCustomerById,updateCustomer,delete
 const customerRoute = express.Router();
 
 customerRoute.post('/customer/create', createCustomer)
-customerRoute.get('/customer/find', getAllCustomers)
+customerRoute.get('/customer/findall', getAllCustomers)
 customerRoute.get('/customer/findbyid/:id',getCustomerById)
 customerRoute.put('/customer/update/:id', updateCustomer)
 customerRoute.delete('/customer/delete/:id', deleteCustomer)

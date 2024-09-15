@@ -37,6 +37,7 @@ Order.belongsTo(Payment, {
 // Satu Payment terkait dengan satu Order
 Payment.hasOne(Order, {
     foreignKey: 'paymentId',
+    as:'order',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })
@@ -45,20 +46,39 @@ Payment.hasOne(Order, {
 // Setiap ListMenu memiliki satu Order
 ListMenu.hasOne(Order,{
     foreignKey:'listMenuId',
-  
+    as:'order'
 })
 
-Order.belongsTo(ListMenu,{
-    foreignKey:'listMenuId',
+// Relasi antara Order dan ListMenu (One-to-One)
+// Setiap Order terkait dengan satu ListMenu
+Order.belongsTo(ListMenu, {
+    foreignKey: 'listMenuId',
+    as: 'listmenu'
 })
 
-FoodItem.hasMany(ListMenu,{
-    foreignKey:'foodItemId',
+// Relasi antara FoodItem dan ListMenu (One-to-Many)
+// Satu FoodItem dapat memiliki banyak ListMenu
+FoodItem.hasMany(ListMenu, {
+    foreignKey: 'foodItemId',
+    as: 'foodItem'
 })
 
-ListMenu.belongsTo(FoodItem,{
-    foreignKey:'foodItemId',
+// Setiap ListMenu terkait dengan satu FoodItem
+ListMenu.belongsTo(FoodItem, {
+    foreignKey: 'foodItemId',
+    as: 'foodItem'
 })
 
+// Relasi antara Customer dan ListMenu (One-to-One)
+// Satu Customer dapat memiliki satu ListMenu
+Customer.hasOne(ListMenu, {
+    foreignKey: 'customerId',  // Foreign key di tabel ListMenu
+    as: 'listmenu'
+});
 
+// Setiap ListMenu terkait dengan satu Customer
+ListMenu.belongsTo(Customer, {
+    foreignKey: 'customerId',  // Foreign key di tabel ListMenu 
+    as: 'customer'
+});
 

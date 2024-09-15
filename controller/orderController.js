@@ -2,6 +2,7 @@ import Order from "../models/orderModel.js"
 import FoodItem from "../models/foodItemModel.js"
 import Customer from "../models/customerModel.js"
 import Payment from "../models/paymentModel.js"
+import ListMenu from "../models/listMenuModel.js"
 export const createOrder = async (req, res) => {
   const { nama, alamat } = req.body;
   try {
@@ -19,14 +20,24 @@ export const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.findAll({
       include:[
-        {model:Customer,as:'customer' },
-        {model:FoodItem,as:'foodItem' },
-        {model:Payment,as:'payment' }
+        {model:Customer,as:'customer',
+          include:[
+            {model:ListMenu,as:'listmenu',
+              include:{
+                model:FoodItem,
+                as:'foodItem'
+              }
+            }
+          ]
+         },
+         {model:Payment,as:'payment'}
+       
+        
       ]
     })
     res.status(200).json(orders)
   } catch (err) {
-    res.status(500).json({ error: err, message: "Error fetching orders" })
+    res.status(500).json({ error: err.message, message: "Error fetching orders" })
   }
 }
 
