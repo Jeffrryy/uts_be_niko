@@ -7,6 +7,7 @@ import order from "./routes/orderRoute.js";
 import foodItems from "./routes/foodItemRoute.js";
 import payment from "./routes/paymentRoute.js";
 import listMenu from "./routes/listMenuRoute.js";
+import authRoute from "./routes/authRoute.js";
 import cors from "cors"
 import './models/index.js'
 const app = express();
@@ -22,6 +23,7 @@ app.use(order)
 app.use(foodItems)
 app.use(payment)
 app.use(listMenu)
+app.use(authRoute)
 app.listen(port, () => {
   console.log(`Server running in ${port}`);
 });

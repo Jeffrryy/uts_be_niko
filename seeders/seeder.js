@@ -3,16 +3,21 @@ import FoodItem from "../models/foodItemModel.js";
 import Order from "../models/orderModel.js";
 import Payment from "../models/paymentModel.js";
 import ListMenu from "../models/listMenuModel.js";
+import bcrypt from "bcrypt"
 import "../models/index.js"
 // Create
 const createSeeder = async () => {
     const customer = await Customer.create({
         nama:"John Doe",
+        email:"john@gmail.com",
+        password:await bcrypt.hash("john123",10),
         alamat:"Jl. Imam Bonjol",
         
     })
     const customer2 = await Customer.create({
         nama:"adam",
+        email:"adam@gmail.com",
+        password:await bcrypt.hash("adam123",10),
         alamat:"jl benda baru"
     })
     const foodItem = await FoodItem.create({

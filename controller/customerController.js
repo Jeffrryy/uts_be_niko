@@ -2,11 +2,12 @@
 import Customer from "../models/customerModel.js"
 
 export const createCustomer = async (req, res) => {
-    const {nama,alamat} = req.body
+    const {nama,alamat,email} = req.body
     try{
         const customer = await Customer.create({
             nama:nama,
-            alamat:alamat
+            alamat:alamat,
+            email:email
         })
         res.status(201).json({customer})
     } catch(err){
@@ -40,7 +41,7 @@ export const getCustomerById = async (req, res) => {
 
 export const updateCustomer = async (req, res) => {
     const { id } = req.params;
-    const { nama, alamat } = req.body;
+    const { nama, alamat, email } = req.body;
     try {
       const customer = await Customer.findByPk(id);
       if (customer) {

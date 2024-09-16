@@ -1,10 +1,10 @@
 import express from 'express';
 import { createFoodItem,deleteFoodItem,getAllFoodItems,getFoodItemsById } from '../controller/foodItemController.js';
-const foodItems =  express.Router()
+const foodItemsRoute =  express.Router()
 
-foodItems.get('/food/findall',getAllFoodItems)
-foodItems.get('/food/findbyid/:id',getFoodItemsById)
-foodItems.delete('/food/delete/:id',deleteFoodItem)
-foodItems.post('/food/create',createFoodItem)
+foodItemsRoute.get('/food/findall',getAllFoodItems)
+foodItemsRoute.get('/food/findbyid/:id',getFoodItemsById)
+foodItemsRoute.delete('/food/delete/:id',deleteFoodItem)
+foodItemsRoute.post('/food/create',createFoodItem)
 
-export default foodItems;
+export default foodItemsRoute;

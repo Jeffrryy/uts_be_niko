@@ -20,10 +20,9 @@ export const createListMenu = async (req, res) => {
 export const getAllListMenu = async (req, res) => {
     try {
         const listMenu = await ListMenu.findAll({
-            include:{
-                model:Customer,
-                as:'customer',
-            }
+            include: [
+                { model: FoodItem, as: 'foodItem' }
+            ]
         });
         res.status(200).json(listMenu);
     } catch (err) {
@@ -35,9 +34,12 @@ export const getAllListMenu = async (req, res) => {
 export const getListMenuById = async (req, res) => {
     const { id } = req.params;
     try {
-        const listMenu = await ListMenu.findByPk(id,{
-            include:FoodItem
-        });
+        const listMenu = await ListMenu.findByPk(id, 
+            {
+                include: [
+                    { model: FoodItem, as: 'foodItem' }
+                ]
+            });
         if (listMenu) {
             res.status(200).json(listMenu);
         } else {

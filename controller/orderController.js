@@ -44,7 +44,21 @@ export const getAllOrders = async (req, res) => {
 export const getOrderById = async (req, res) => {
   const { id } = req.params
   try {
-    const order = await Order.findByPk(id);
+    const order = await Order.findByPk(id, {
+      include: [
+        {model:Customer,as:'customer',
+          include:[
+            {model:ListMenu,as:'listmenu',
+              include:{
+                model:FoodItem,
+                as:'foodItem'
+              }
+            }
+          ]
+         },
+         {model:Payment,as:'payment'}        
+      ]
+    });
     if (order) {
       res.status(200).json(order)
     } else {
