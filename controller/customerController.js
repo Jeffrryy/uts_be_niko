@@ -1,19 +1,19 @@
 
 import Customer from "../models/customerModel.js"
 
-export const createCustomer = async (req, res) => {
-    const {nama,alamat,email} = req.body
-    try{
-        const customer = await Customer.create({
-            nama:nama,
-            alamat:alamat,
-            email:email
-        })
-        res.status(201).json({customer})
-    } catch(err){
-        res.status(500).json({error:err, message:"Error creating customer"})
-    }
-}
+// export const createCustomer = async (req, res) => {
+//     const {nama,alamat,email} = req.body
+//     try{
+//         const customer = await Customer.create({
+//             nama:nama,
+//             alamat:alamat,
+//             email:email
+//         })
+//         res.status(201).json({customer})
+//     } catch(err){
+//         res.status(500).json({error:err, message:"Error creating customer"})
+//     }
+// }
 
 export const getAllCustomers = async (req, res) => {
     try{
@@ -45,15 +45,18 @@ export const updateCustomer = async (req, res) => {
     try {
       const customer = await Customer.findByPk(id);
       if (customer) {
-        customer.nama = nama;
-        customer.alamat = alamat;
-        await customer.save();
-        res.status(200).json(customer);
+        
+      await customer.update({
+        nama:nama,
+        alamat:alamat,
+      }) 
+      
+        res.status(200).json({message:"Customer updated successfully",customer});
       } else {
         res.status(404).json({ message: "Customer not found" });
       }
     } catch (error) {
-      res.status(500).json({ message: "Error updating customer", error });
+      res.status(500).json({ message: "Error updating customer", error:error.message });
     }
 }
 

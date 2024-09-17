@@ -1,22 +1,23 @@
 import Payment from "../models/paymentModel.js";
 
 export const createPayment = async (req, res) => {
-  const { itemName, price } = req.body;
+  const { paymentDate, amount, paymentType } = req.body;
   try {
     const payment = await Payment.create({
-      itemName: itemName,
-      price: price
+      paymentDate: paymentDate,
+      amount: amount,
+      paymentType: paymentType
     })
-    res.status(201).json(payment)
+    res.status(201).json({message:"Payment created successfully",payment})
   } catch (err) {
-    res.status(500).json({ error: err, message: "Couldn't create" })
+    res.status(500).json({ error: err, message: "Couldn't create payment" })
   }
 }
 
 export const getAllPayments = async (req, res) => {
   try {
     const payments = await Payment.findAll()
-    res.status(200).json(payments)
+    res.status(200).json({message:"Payment fetched successfully",payments})
   } catch (err) {
     res.status(500).json({ error: err, message: "Couldn't find any payments" })
   }

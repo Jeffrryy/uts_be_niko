@@ -4,15 +4,18 @@ import Customer from "../models/customerModel.js"
 import Payment from "../models/paymentModel.js"
 import ListMenu from "../models/listMenuModel.js"
 export const createOrder = async (req, res) => {
-  const { nama, alamat } = req.body;
+  const { status, orderDate, customerId, paymentId, listMenuId } = req.body;
   try {
     const order = await Order.create({
-      nama: nama,
-      alamat: alamat
+        status:status,
+        orderDate:orderDate,
+        customerId:customerId,
+        paymentId:paymentId,
+        listMenuId:listMenuId,
     })
     res.status(201).json({ order })
   } catch (err) {
-    res.status(500).json({ error: err, message: "Error creating order" })
+    res.status(500).json({ error: err.message, message: "Error creating order" })
   }
 }
 
@@ -71,19 +74,30 @@ export const getOrderById = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
   const { id } = req.params;
-  const { nama, alamat } = req.body;
+  const { status, orderDate, customerId, paymentId, listMenuId  } = req.body;
   try {
     const order = await Order.findByPk(id);
     if (order) {
-      order.nama = nama;
-      order.alamat = alamat;
-      await order.save();
-      res.status(200).json(order);
+
+      await order.update({
+        status:status,
+        orderDate:orderDate,
+        customerId:customerId,
+        paymentId:paymentId,
+        listMenuId:listMenuId,
+      })
+      // order.status = status;
+      // order.orderDate = orderDate;
+      // order.customerId = customerId;
+      // order.paymentId = paymentId;
+      // order.listMenuId = listMenuId;
+      // await order.save();
+      res.status(200).json({message:"Order updated successfully",order});
     } else {
       res.status(404).json({ message: "Order not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error updating order", error });
+    res.status(500).json({ message: "Error updating order", error:error.message });
   }
 }
 
