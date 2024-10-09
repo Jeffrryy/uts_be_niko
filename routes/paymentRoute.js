@@ -5,7 +5,7 @@ const paymentRoute = express.Router()
 paymentRoute.get('/payment/findbyid/:id', getPaymentById);
 paymentRoute.get('/payment/findall',getAllPayments)
 paymentRoute.post('/payment/create',createPayment)
-paymentRoute.delete('/payment/delete',deletePayment)
+paymentRoute.delete('/payment/delete/:id',deletePayment)
 
 export default paymentRoute;  
 

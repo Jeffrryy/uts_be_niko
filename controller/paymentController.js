@@ -1,4 +1,4 @@
-import Payment from "../models/paymentModel.js";
+  import Payment from "../models/paymentModel.js";
 
 export const createPayment = async (req, res) => {
   const { paymentDate, amount, paymentType } = req.body;
@@ -17,7 +17,7 @@ export const createPayment = async (req, res) => {
 export const getAllPayments = async (req, res) => {
   try {
     const payments = await Payment.findAll()
-    res.status(200).json({message:"Payment fetched successfully",payments})
+    res.status(200).json(payments)
   } catch (err) {
     res.status(500).json({ error: err, message: "Couldn't find any payments" })
   }

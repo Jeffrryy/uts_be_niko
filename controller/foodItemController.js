@@ -27,7 +27,7 @@ export const getFoodItemsById = async (req,res) => {
     try{
        const foodItem= await FoodItem.findByPk(id);
        if(foodItem){
-           res.status(200).json(customer)
+           res.status(200).json(foodItem)
        } else {
            res.status(404).json({message: "customer not found"})
        }
@@ -42,12 +42,12 @@ export const deleteFoodItem = async (req, res) => {
     try {
       const foodItem = await FoodItem.findByPk(id);
       if (foodItem) {
-        await customer.destroy();
+        await foodItem.destroy();
         res.status(200).json({ message: "foodItem deleted successfully" });
       } else {
         res.status(404).json({ message: "foodItem not found" });
       }
     } catch (error) {
-      res.status(500).json({ message: "Error deleting customer", error });
+      res.status(500).json({ message: "Error deleting food", error });
     }
 }
